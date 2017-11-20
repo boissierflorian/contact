@@ -90,7 +90,36 @@
       });
 
       QUnit.test("first entry tests", function (assert) {
-        assert.ok(false);
+        var data = ["Eric", "RAMAT", "0616642258", "0321465676",
+          "ramat@lisic.univ-littoral.fr", "eric.ramat@gmail.com", "prof"];
+
+        var iter = Contact.Contacts.instance().iterator();
+        assert.ok(iter.hasNext());
+
+        var row = iter.next();
+        assert.ok(row.firstName() == data[0]);
+        assert.ok(row.lastName() == data[1]);
+        assert.ok(row.phones()[0].number() == data[2]);
+        assert.ok(row.phones()[1].number() == data[3]);
+        assert.ok(row.mails()[0].address() == data[4]);
+        assert.ok(row.mails()[1].address() == data[5]);
+        assert.ok(row.tags()[0] == data[6]);
+
+        var viewLigne = $('#contacts table > tbody > tr:nth-child(2)')[0];
+        assert.ok(row.firstName() == viewLigne.children[0].innerHTML);
+        assert.ok(row.lastName() == viewLigne.children[1].innerHTML);
+
+        var phone_data = row.phones()[0].number() + "[PRO][MOBILE]/" +
+          row.phones()[1].number() + "[PRO][PHONE]";
+
+        assert.ok(viewLigne.children[2].innerHTML == phone_data);
+
+        var mail_data = row.mails()[0].address() + "[PRO]/" +
+          row.mails()[1].address() + "[PERSO]";
+
+        assert.ok(viewLigne.children[3].innerHTML == mail_data);
+        assert.ok(viewLigne.children[4].innerHTML == row.tags()[0]);
+      
       });
 
       QUnit.test("remove contact tests", function (assert) {
