@@ -64,7 +64,13 @@
     <!-- BEGIN - Les tests -->
     <script>
       QUnit.test("header tests", function (assert) {
-        assert.ok(false);
+      var entete = ["First name", "Last name", "Phones", "Mails", "Tags", "Actions"];
+      var index = 0;
+      
+      $('#contacts table th').each(function(){
+        assert.ok($( this )[0].innerHTML === entete[index++]);
+      });
+      
       });
 
       QUnit.test("list tests", function (assert) {
