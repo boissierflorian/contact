@@ -74,7 +74,19 @@
       });
 
       QUnit.test("list tests", function (assert) {
-        assert.ok(false);
+        var noms = [["Eric", "RAMAT"], ["Jacques", "DURAND"],
+           ["Pierre", "DUPONT"], ["Jean", "DUPOND"]];
+
+      var iterator = Contact.Contacts.instance().iterator();
+      var index = 0;
+
+      while (iterator.hasNext())
+      {
+         var ligne = iterator.next();
+         var donnees = noms[index++];
+         assert.ok(ligne.firstName() == donnees[0] && ligne.lastName() == donnees[1]);
+      }
+        
       });
 
       QUnit.test("first entry tests", function (assert) {
