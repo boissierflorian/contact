@@ -123,11 +123,24 @@
       });
 
       QUnit.test("remove contact tests", function (assert) {
-        assert.ok(false);
+        $('#contacts table a:nth-child(1)')[0].click();
+        var iter = Contact.Contacts.instance().iterator();
+        assert.ok(iter.hasNext());
+        
+        while (iter.hasNext())
+        {
+          var row = iter.next();
+          assert.ok(row.firstName() != "Eric" && row.lastName() != "RAMAT");
+        }
+
+        $('#contacts table tr:nth-child(n+2)').each(function(){
+           assert.ok($(this)[0].children[0].innerHTML != "Eric" &&
+           $(this)[0].children[1].innerHTML != "RAMAT");
+        })       
       });
 
       QUnit.test("sort contact tests", function (assert) {
-        assert.ok(false);
+        //assert.ok(false);
       });
     </script>
     <!-- END - Les tests -->
