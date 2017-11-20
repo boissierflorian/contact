@@ -140,7 +140,23 @@
       });
 
       QUnit.test("sort contact tests", function (assert) {
-        //assert.ok(false);
+        $('#button_sort').click();
+        var iterator = Contact.Contacts.instance().iterator();
+        var index = 0;
+        var last_names = [];
+      
+        while (iterator.hasNext())
+        {
+          var ligne = iterator.next();
+          last_names.push(ligne.lastName());
+        }
+
+        last_names.sort(function(a, b){ return a > b; });
+
+	$('#contacts table tr:nth-child(n+2)').each(function(){
+           assert.ok($(this)[0].children[1].innerHTML == last_names[index++]);
+        });					 
+						   
       });
     </script>
     <!-- END - Les tests -->
