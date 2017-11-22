@@ -38,6 +38,12 @@
 
         Contact.Contacts.instance().add(contact);
       }
+
+      function cancel(){
+        $('#contact_form > input[name="nom"]').val("");
+        $('#contact_form > input[name="prenom"]').val("");
+        $('#contact_form > input[name="mail"]').val("");
+      }
     </script>
     <!-- END - Script -->
 
@@ -99,7 +105,7 @@
       <input type="text" name="mail">
       <br><br>
       <input id="valider" type="button" onclick="ajouterContact();" value="Valider">
-      <input id="annuler" type="button" value="Annuler">
+      <input id="annuler" type="button" onclick="cancel();" value="Annuler">
     </form>
   </div>
 <div id="qunit"></div>
